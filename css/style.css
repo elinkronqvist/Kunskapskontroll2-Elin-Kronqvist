@@ -1,0 +1,130 @@
+
+
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body{
+    background-image: linear-gradient( rgb(176, 231, 223), rgb(223, 228, 240));
+    font-family: monospace, sans-serif;
+    height: 100vh;
+    margin: 2rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+/* .main-container{
+    background: lightgrey;
+    margin: 0 auto;
+    width: 80%;
+    height: 100vh;
+} */
+
+main{
+    display: inline-block;
+    height: 100%;
+    width: 70%;
+    background: url(/img/landscape-background.jpg) no-repeat center center /cover;
+    border-radius: 1rem;
+    margin: 2rem auto;
+    padding: 2rem;
+    border: rgba(95, 102, 121, 0.473) .2rem solid;
+}
+
+.hero-content{
+    height: 100%;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+#form{
+    height: 5rem;
+    width: 70%;
+    background: rgba(61, 60, 60, 0.322);
+    /* måste kolla denna! centrera!             <-------------------*/ 
+    margin: 0 5rem 2rem 5rem; 
+    /* margin-bottom: 2rem; */
+    padding: 2rem;
+    border-radius: .2rem;
+    color: rgba(44, 43, 43, 0.856);
+    text-align: center;
+    align-items: center;
+    justify-content: center;
+}
+
+#submit-button{
+    font-family: monospace, sans-serif;
+    padding: 0 1.5rem 0 1.5rem;
+}
+
+.main-header{
+    font-size: 4rem;
+    color: rgba(44, 43, 43, 0.534);
+    margin-bottom: 2rem;
+    text-align: center;
+    color: rgba(rgb(66, 99, 161), green, blue, alpha);
+}
+
+#middle{
+    border-radius: .2rem;
+    margin-bottom: 2.5rem;
+    padding: 2rem;
+    width: 35%;
+    text-align: center;
+}
+
+.city-header{
+    font-size: 2rem;
+    color: rgba(44, 43, 43, 0.781);
+    margin-bottom: .5rem;
+    text-align: center;
+}
+
+div{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.icon{
+    font-size: 1.5rem;
+    color: rgba(44, 43, 43, 0.534);
+    margin-bottom: 2rem;
+}
+
+
+.list{
+    height: 20%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 2rem;
+    padding: 2rem;
+    border-radius: .2rem;
+    color: rgba(44, 43, 43, 0.856);
+}
+
+.list-item{
+    list-style: none;
+    line-height: 2rem;
+    text-align: center;
+    margin: 1rem;
+    border-radius: .2rem;
+    padding: .8rem;
+}
+
+
+
+@media only screen and (max-width: 1200px){
+    
+.list{
+    display: flex;
+    flex-direction: column;
+}

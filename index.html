@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/style.css">
+    <title>Document</title>
+</head>
+<body>
+    <!-- <div class="main-container"> -->
+        <main class="main">
+            <section class="hero-content">
+                <h2 class="main-header">Weather of today</h2>
+                <form id='form'>
+                    <label for='city'>Search city: </label>
+                    <input type='text' onfocus="this.value = ''" id="city" placeholder = 'City...'>
+                    <button type='submit' id="submit-button">Go</button>
+                </form>
+                <article id='middle'>
+                    <h3 class="city-header"></h3>
+                <div>
+                    <img id="icon" src="">
+                </div>
+                </article>
+                
+                <ul class="list">
+                    <li class="list-item" id="description"></li>
+                    <li class="list-item" id="temperature"></li>
+                    <li class="list-item" id="wind"></li>
+                    <li class="list-item" id="humidity"></li>
+                    <li class="list-item" id="timezone"></li>
+                </ul>
+            </section>
+        </main>
+    <!-- </div> -->
+   
+    
+
+
+    <script src="app.js"></script>
+</body>
+</html>
