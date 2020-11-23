@@ -1,36 +1,28 @@
+
 const apiKey = '069fe69d06fd69affcdb7b7e11bfad19';
 let cityName = 'Helsingborg';
 
-//ändra metric till celsius
 
 
-
-
+//skapar ett element för #form
 let formElement = document.querySelector('#form');
 
+//lägger till en eventlistener
 formElement.addEventListener('submit', 
     function(event){
         event.preventDefault();
 
+        //skapar ett element för city
         let cityInput = document.querySelector('#city');
 
+        //skapar en variabel som sparar det inmatade värdet i input
         let city = cityInput.value;
+        //efter en inmatning i input ändras rutan till tom
         cityInput.value = '';
+        // en if-sats som skickar ett meddelande om användaren gör en sökning utan att ha skrivit in något i input-fältet 
         if (city == ''){
             alert('Välj en stad');
         }
-
-
-        /* //skapar ett element för h3 där den aktuella staden visas
-        h3Element = document.querySelector('.city-header');
-        //ger elementet värdet av city från input value
-        h3Element.innerText = city;
-        //ändrar första bokstaven till versal
-        h3Element.style.textTransform = 'capitalize'; */
-        /* resetInput();
-        function resetInput(){
-            h3Element = document.querySelector('.city-header').reset();
-        } */
 
         let url = `http://api.openweathermap.org/data/2.5/weather?q=${city}&units=metric&appid=069fe69d06fd69affcdb7b7e11bfad19&lang`;
 
@@ -40,23 +32,23 @@ formElement.addEventListener('submit',
                 //responset innehåller en header med info om hur det har gått 
             console.log(response);
 
-            //let h3Element = document.querySelector('.city-header');
-            //h3Element.innerHTML = 'Staden kunde inte hittas';
-
-        
             //statuskod 200 - 299 betyder att allt har gått bra
             if(response.status >= 200 && response.status <300){
                 return response.json();
                 //statuskod 404 "not found" kommer vi hantera som ett error
             // i vårat fall betyder det att staden inte kunde hittas
             }else if(response.status === 404){
+                //skickar ett meddelande till användaren
                 alert('Staden kunde inte hittas');
+                //meddelande i consolen
                 throw 'Staden kunde inte hittas';
 
                 //statuskod 401 "unauthorized" kommer att hanters som ett error
                 //i detta fall betyder det att api nyckeln är fel
             }else if(response.status === 401){
+                //skickar ett meddelande till användaren
                 alert ('Fel API-nyckel');
+                //meddelande i consolen
                 throw response.statusText, 'Fel API-nyckel';
             }
             
@@ -81,53 +73,27 @@ formElement.addEventListener('submit',
                 //ändrar första bokstaven till versal
                 h3Element.style.textTransform = 'capitalize';
 
-                //ändra bakgrund på middle beroende på väder:
+                //skapar en funktion som ändrar bakgrund på #middle beroende på väder:
                 function weatherBackground(){
+                    //skapar ett element för #middle
                     let middleElement = document.querySelector('#middle');
+                    //ger elementet en bakgrundsbild beroende av vilket väder ikonen från url:en visar
                     middleElement.style.backgroundImage = `url(/img/${iconImg}.jpg)`;
                     middleElement.style.backgroundRepeat = 'no-repeat';
                 }
 
+                //kallar på funktionen som ändrar bakgrunden
                 weatherBackground();
                 
-                //behövs dessa två nedan?? ligger dubbelt?
-                /* let cityInput = document.querySelector('#city');
-                let city = cityInput.value;
-                cityInput.value = ''; */
-                
-                //om det raderas i sökfältet ska även värdena raderas??
-                /* if(city === null){
-                } */
-
                 //skapar en eventlistener på input-fältet som gör att datan raderas när man klickar för att söka efter en ny stad.
                 cityInput.addEventListener('click', resetData);
-                
-                //behövs denna?
-                /* setTimeout(
-                    function(){ //denna funkar??
-                        console.log('heeeelloo');
-                        
-                        resetData();
-                        //cityInput.reset();
-                        //reset(description, temperature, temperatureFeelsLike, wind, humidity);
-                    }, 1000 // millisekunder
-                ) */   
+                  
                 }
         ).catch(
             function(error){
                 console.log(error);
-                //skapar element för h3 för att kunna skriva ut ett meddelande i webbläsaren 
 
-                //funkar ej längre när jag kallar på function? varför?
-                //let h3Element = document.querySelector('.city-header');
-                //h3Element.innerHTML = 'Staden kunde inte hittas';
-
-                
-                //skickar ett meddelande till användaren  
-                
-                //alert funkar ej om man kör h3.innerText ??
-
-                //kallar på funktionen som gör restet på all data som vi fått fram efter sökning. denna ska inte ligga här??
+                //kallar på funktionen som gör restet på all data som vi fått fram efter sökning.
                 resetData(); 
             }
         )
@@ -145,116 +111,11 @@ function presentData(i, d, t, tTwo, w, h){
     //tilldelar elementet en src från url:en
     iconWeatherElement.src = iconUrl;
 
-
-
-    /* -------------- Ändra bakgrund på main beroende på väder: ------------*/
-
-    /* function weatherBackground(){
-        let weatherImg = 
-        mainElement.style.backgroundImage = `url('/img/${weatherImg}.jpg)`;
-    } */
-/* 
-    let middleElement = document.querySelector('#middle');
-    if (i == '01d'){
-        middleElement.style.backgroundImage = "url('/img/clear-sky.jpg')";
-        middleElement.style.backgroundRepeat = 'no-repeat';
-    }else if (i == '02d'){
-        middleElement.style.backgroundImage = "url('/img/few-clouds.jpg')";
-        middleElement.style.backgroundRepeat = 'no-repeat';
-    }else if (i == '03d'){
-        middleElement.style.backgroundImage = "url('/img/scattered-clouds.jpg')";
-        middleElement.style.backgroundRepeat = 'no-repeat';
-    }else if (i == '04d'){
-        middleElement.style.backgroundImage = "url('/img/broken-clouds.jpg')"; 
-        middleElement.style.backgroundRepeat = 'no-repeat';
-
-    }else if (i == '09d'){
-        middleElement.style.backgroundImage = "url('/img/shower-rain.jpg')";
-        middleElement.style.backgroundRepeat = 'no-repeat';
-    }else if (i == '10d'){
-        middleElement.style.backgroundImage = "url('/img/rain.jpg')";
-        middleElement.style.backgroundRepeat = 'no-repeat';
-    }else if (i == '11d'){
-        middleElement.style.backgroundImage = "url('/img/thunderstorm.jpg')";
-        middleElement.style.backgroundRepeat = 'no-repeat';
-    }else if (i == '13d'){
-        middleElement.style.backgroundImage = "url('/img/snow.jpg')";
-        middleElement.style.backgroundRepeat = 'no-repeat';
-    }else if (i == '50d'){
-        middleElement.style.backgroundImage = "url('/img/mist4.jpg')";
-    }else if (i == '01n'){
-        middleElement.style.backgroundImage = "url('/img/broken-clouds.jpg')";
-    }else if (i == '02n'){
-        middleElement.style.backgroundImage = "url('/img/broken-clouds.jpg')";
-    }else if (i == '03n'){
-        middleElement.style.backgroundImage = "url('/img/broken-clouds.jpg')";
-    }else if (i == '04n'){
-        middleElement.style.backgroundImage = "url('/img/broken-clouds.jpg')";
-    }else if (i == '09n'){
-        middleElement.style.backgroundImage = "url('/img/broken-clouds.jpg')";
-    }else if (i == '10n'){
-        middleElement.style.backgroundImage = "url('/img/broken-clouds.jpg')";
-    }else if (i == '11n'){
-        middleElement.style.backgroundImage = "url('/img/broken-clouds.jpg')";
-    }else if (i == '13n'){
-        middleElement.style.backgroundImage = "url('/img/broken-clouds.jpg')";
-    }else if (i == '50n'){
-        middleElement.style.backgroundImage = "url('/img/broken-clouds.jpg')";
-    }
-    //funkar ej??  */
-
-    
-   /*  let mainElement = document.querySelector('.main');
-    if (i == '01d'){
-        mainElement.style.backgroundImage = "url('/img/broken-clouds.jpg')";
-    }else if (i == '02d'){
-        mainElement.style.backgroundColor = 'blue';
-    }else if (i == '03d'){
-        mainElement.style.backgroundColor = 'green';
-    }else if (i == '04d'){
-        mainElement.style.backgroundImage = "url('/img/broken-clouds.jpg')"; 
-    }else if (i == '09d'){
-        mainElement.style.backgroundColor = 'hotpink';
-    }else if (i == '10d'){
-        mainElement.style.backgroundImage = "url('rain.jpg')"; 
-    }else if (i == '11d'){
-        mainElement.style.backgroundColor = 'white';
-    }else if (i == '13d'){
-        mainElement.style.backgroundColor = 'black';
-    }else if (i == '50d'){
-        mainElement.style.backgroundColor = 'orange';
-    }else if (i == '01n'){
-        mainElement.style.backgroundColor = 'violet';
-    }else if (i == '02n'){
-        mainElement.style.backgroundColor = 'blue';
-    }else if (i == '03n'){
-        mainElement.style.backgroundColor = 'green';
-    }else if (i == '04n'){
-        mainElement.style.backgroundImage = "url('/img/broken-clouds.jpg')";
-    }else if (i == '09n'){
-        mainElement.style.backgroundColor = 'hotpink';
-    }else if (i == '10n'){
-        mainElement.src = '/img/rain.jpg';
-    }else if (i == '11n'){
-        mainElement.style.backgroundColor = 'white';
-    }else if (i == '13n'){
-        mainElement.style.backgroundColor = 'black';
-    }else if (i == '50n'){
-        mainElement.style.backgroundColor = 'orange';
-    }
-    //funkar ej??  */
-
-
-
     //skapar ett element för description
     let descriptionElement = document.querySelector('#description');
-
-/*     //lägger in en funktion som gör om första bokstaven till en versal
-    function capitalizeFirstLetter(d){
-        return d.charAt(0).toUpperCase() + d.slice(1);
-    }
-    descriptionElement.innerText = capitalizeFirstLetter(d); */
+    // ger elementet ett värde
     descriptionElement.innerText = d;
+    //gör om första bokstaven till Versal
     descriptionElement.style.textTransform = 'capitalize';
 
     //lägger till bakgrundsfärg
@@ -264,10 +125,12 @@ function presentData(i, d, t, tTwo, w, h){
     let temperatureElement = document.querySelector('#temperature');
     let temperatureFeelsLikeElement = document.querySelector('#temperature');
 
+    //skapar en funktion som avrundar till ett heltal
     function mathRound(x) {
         return Math.round(x);
     };
 
+    // ger elementet ett värde samt med hjälp av en if-sats ändras färgen på texten som visar temperatur
     temperatureElement.innerText = `Temperature: ${mathRound(t)} \u00B0 \n Feels like: ${mathRound(tTwo)} \u00B0`;
     if (t >= -20 && t <= 5){
         temperatureElement.style.color = 'rgb(223, 228, 240)';     
@@ -288,6 +151,7 @@ function presentData(i, d, t, tTwo, w, h){
 
     //skapar ett element för wind
     let windElement = document.querySelector('#wind');
+    //ger elementet ett värde
     windElement.innerText = `Wind: ${w} m/s`;
 
     //lägger till bakgrundsfärg
@@ -295,13 +159,14 @@ function presentData(i, d, t, tTwo, w, h){
 
     //skapar ett element för humidity
     let humidityElement = document.querySelector('#humidity');
+    //ger elementet ett värde
     humidityElement.innerText = `Humidity: ${h} %`;
 
     //lägger till bakgrundsfärg
     humidityElement.style.backgroundColor = 'rgba(61, 60, 60, 0.322)';
 }
 
-
+//skapar en funktion som rensar bort datan när användaren klickar i inputfältet
 function resetData(){
     //skapar ett element för ikonen
     let iconWeatherElement = document.querySelector('#icon');
@@ -341,17 +206,9 @@ function resetData(){
     //ändrar värdet till null för att inget ska visas
     h3Element.innerText = null;
 
-    //skapar ett element för main
-    let mainElement = document.querySelector('.main');
-    //ändrar bakgrunden till inget värde
-    mainElement.style.backgroundImage = '';
-
     //skapar ett element för #middle
     let middleElement = document.querySelector('#middle');
     //ändrar bakgrunden till inget värde
-    middleElement.style.backgroundImage = '';
-
-
-    
+    middleElement.style.backgroundImage = '';  
 }
 
