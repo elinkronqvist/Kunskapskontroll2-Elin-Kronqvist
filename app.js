@@ -93,7 +93,7 @@ formElement.addEventListener('submit',
             function(error){
                 console.log(error);
 
-                //kallar på funktionen som gör restet på all data som vi fått fram efter sökning.
+                //kallar på funktionen som gör reset på all data som vi fått fram efter sökning. Gör alltså en reset om användaren skrivit in en felaktig stad, så att datan inte ligger kvar.
                 resetData(); 
             }
         )
@@ -123,7 +123,6 @@ function presentData(i, d, t, tTwo, w, h){
     
     //skapar ett element för temperature + feels_like
     let temperatureElement = document.querySelector('#temperature');
-    let temperatureFeelsLikeElement = document.querySelector('#temperature');
 
     //skapar en funktion som avrundar till ett heltal
     function mathRound(x) {
